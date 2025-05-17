@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Compressor</title>
+  <script src="https://kit.fontawesome.com/17c34a5251.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  
+  <div class="container">
+    <h1>Image Compressor</h1>
+    
+<div id="drop-area" class="drop-area no-files">
+      <p id="drop-area-text">Drag & Drop Your Files Here</p>
+      <div id="drop-indicator" class="drop-indicator">
+        <i class="fa-solid fa-cloud-arrow-down"></i>
+        <p>Release to Upload</p>
+      </div>
+      <span id="file-info" class="file-info"></span>
+      <input type="file" id="fileInput" accept="video/*,image/*" multiple hidden>
+      <button id="browseBtn">Browse Files</button>
+    </div>
+    
+    <div id="size-controls" class="size-controls">
+      <div class="slider-container">
+        <input type="range" id="size-slider" class="size-slider" min="10" max="100" value="80">
+        <span id="size-value" class="size-value">80%</span>
+      </div>
+      <select id="unit-selector" class="unit-selector">
+        <option value="percent">Percent</option>
+        <option value="size">Size (KB)</option>
+      </select>
+    </div>
+    
+    <div id="options" class="options">
+      <label for="resolution">Select Resolution</label>
+      <div class="resolutions">
+        <input type="radio" id="2160" name="resolution" value="2160">
+        <label for="2160">4K</label>
+        <input type="radio" id="1440" name="resolution" value="1440">
+        <label for="1440">1440p</label>
+        <input type="radio" id="1080" name="resolution" value="1080">
+        <label for="1080">1080p</label>
+        <input type="radio" id="720" name="resolution" value="720">
+        <label for="720">720p</label>
+        <input type="radio" id="480" name="resolution" value="480">
+        <label for="480">480p</label>
+        <input type="radio" id="360" name="resolution" value="360">
+        <label for="360">360p</label>
+      </div>
+    </div>
+    
+    <button id="compressBtn">Compress</button>
+    
+    <div id="output" class="output"></div>
+  </div>
+  
+  <div id="theme-toggle" class="theme-toggle">
+    <span id="theme-icon" class="fa-solid fa-moon"></span>
+  </div>
+  
+  <div id="error-card"></div>
+  
+  <script src="script.js"></script>
+</body>
+</html>
