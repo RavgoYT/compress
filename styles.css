@@ -13,26 +13,13 @@
   --accent-gradient: linear-gradient(135deg, #FF9F0A, #FFCC00);
   --success-color: #30D158;
   --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-invis: rgba(255, 255, 255, 0.01);
   --glass-border: rgba(255, 255, 255, 0.08);
   --download-bg: #FF9F0A;
   --slider-bg: #2A3035;
   --bg-gradient: linear-gradient(135deg, #1E2428, #2A3035);
+  --slider-track-bg: #4A5055;
   --gradient-stroke: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.05));
-  background: 
-    /* Deep blue in bottom left */
-    radial-gradient(circle at 20% 90%, rgba(26, 71, 155, 0.85) 0%, rgba(26, 71, 155, 0) 55%),
-    /* Mid blue in bottom left */
-    radial-gradient(circle at 10% 60%, rgba(64, 115, 207, 0.75) 0%, rgba(64, 115, 207, 0) 60%),
-    /* Light gold rays in top right */
-    radial-gradient(circle at 80% 15%, rgba(255, 204, 0, 0.8) 0%, rgba(255, 204, 0, 0) 65%),
-    /* Orange rays in middle right */
-    radial-gradient(circle at 90% 40%, rgba(255, 159, 10, 0.7) 0%, rgba(255, 159, 10, 0) 60%),
-    /* Light blue in top left */
-    radial-gradient(circle at 30% 20%, rgba(122, 162, 247, 0.6) 0%, rgba(122, 162, 247, 0) 55%),
-    /* Subtle purple transition zone */
-    radial-gradient(ellipse at 60% 50%, rgba(185, 132, 220, 0.4) 0%, rgba(185, 132, 220, 0) 70%),
-    /* Base dark gradient */
-    linear-gradient(135deg, #131820 0%, #1E2428 100%);
   background-attachment: fixed;
   background-size: 200% 200%;
   background-position: center;
@@ -56,23 +43,17 @@ body.light-mode {
   --download-bg: #8B5CF6;
   --slider-bg: #E5E7EB;
   --bg-gradient: linear-gradient(135deg, #EEF2FF, #F5F3FF);
+  --slider-track-bg: #D1D5DB;
   --gradient-stroke: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(139,92,246,0.15));
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: 
-    /* Deep blue/purple in bottom left */
     radial-gradient(circle at 20% 80%, rgba(67, 56, 202, 0.8) 0%, rgba(67, 56, 202, 0) 50%),
-    /* Deep purple in middle left */
     radial-gradient(ellipse at 10% 40%, rgba(109, 40, 217, 0.7) 0%, rgba(109, 40, 217, 0) 60%),
-    /* Magenta in center */
     radial-gradient(circle at 50% 50%, rgba(192, 38, 211, 0.6) 0%, rgba(192, 38, 211, 0) 55%),
-    /* Pink in top right */
     radial-gradient(ellipse at 80% 20%, rgba(236, 72, 153, 0.7) 0%, rgba(236, 72, 153, 0) 60%),
-    /* Light lavender in right middle */
     radial-gradient(circle at 85% 60%, rgba(216, 180, 254, 0.8) 0%, rgba(216, 180, 254, 0) 50%),
-    /* Light blue in top */
     radial-gradient(ellipse at 30% 10%, rgba(196, 181, 253, 0.5) 0%, rgba(196, 181, 253, 0) 60%),
-    /* Base gradient */
     linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
   background-attachment: fixed;
   background-size: 200% 200%;
@@ -91,33 +72,28 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  height: 100%;
+  margin: 0;
   color: var(--text-color);
   transition: all 0.5s ease;
   overflow-x: hidden;
-}
-
-body:not(.light-mode) {
-  
   background: 
-
     radial-gradient(circle at 20% 90%, rgba(26, 71, 155, 0.85) 0%, rgba(26, 71, 155, 0) 55%),
-
     radial-gradient(circle at 10% 60%, rgba(64, 115, 207, 0.75) 0%, rgba(64, 115, 207, 0) 60%),
-
     radial-gradient(circle at 80% 15%, rgba(255, 204, 0, 0.8) 0%, rgba(255, 204, 0, 0) 65%),
-
     radial-gradient(circle at 90% 40%, rgba(255, 159, 10, 0.7) 0%, rgba(255, 159, 10, 0) 60%),
-
     radial-gradient(circle at 30% 20%, rgba(122, 162, 247, 0.6) 0%, rgba(122, 162, 247, 0) 55%),
-
     radial-gradient(ellipse at 60% 50%, rgba(185, 132, 220, 0.4) 0%, rgba(185, 132, 220, 0) 70%),
-
     linear-gradient(135deg, #131820 0%, #1E2428 100%);
   background-attachment: fixed;
   background-size: 200% 200%;
   background-position: center;
 }
 
+html {
+  height: 100%;
+  margin: 0;
+}
 
 .container {
   text-align: center;
@@ -210,7 +186,6 @@ h1 {
   transform: scale(1.02);
 }
 
-/* Drag and drop animation styles */
 .drop-area.drag-active {
   border-color: var(--accent-color);
   animation: pulse 1.5s infinite ease-in-out;
@@ -235,53 +210,32 @@ h1 {
   animation: glow 1.5s infinite ease-in-out;
 }
 
-/* Screen-wide drag overlay */
 #drag-drop-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    /* Neutral dark overlay for dimming, works well with both themes */
     background-color: rgba(0, 0, 0, 0.65); 
-    /* macOS often uses a subtle blur for overlays. Adjust as you like.
-       If you have --bg-color-rgb variables, you could use:
-       background-color: rgba(var(--bg-color-rgb-values, 0,0,0), 0.4);
-       backdrop-filter: blur(5px); 
-    */
-    z-index: 9990; /* High, but below the main content container during drag */
+    z-index: 9990;
     opacity: 0;
-    pointer-events: none; /* Allows events to pass through when hidden */
-    transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth fade */
-    will-change: opacity; /* Hint for browser optimization */
+    pointer-events: none;
+    transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: opacity;
 }
 
 #drag-drop-overlay.visible {
     opacity: 1;
-    pointer-events: auto; /* Block interactions with elements below when visible */
+    pointer-events: auto;
 }
 
-/* Class for the body when dragging is active globally */
 body.dragging-globally .container {
-    position: relative; /* Ensure z-index applies */
-    z-index: 9995;      /* Above the overlay */
-    /* Optional: enhance the "pop" effect for the container.
-       You can add a subtle scale or a glow using your accent color.
-       Example (requires --accent-color-rgb variable e.g., 255, 159, 10 for orange):
-       box-shadow: 0 0 35px 5px rgba(var(--accent-color-rgb), 0.4);
-       transform: scale(1.015);
-    */
+    position: relative;
+    z-index: 9995;
     transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), 
                 box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: transform, box-shadow;
 }
-
-/* Ensure the .drop-area and its .drop-indicator remain prominent
-   when directly hovered, even with the global effect.
-   Their existing z-index and styles should work, but confirm they appear above
-   any general content within the .container if it also has complex stacking.
-*/
-
 
 @keyframes pulse {
   0%, 100% {
@@ -300,7 +254,6 @@ body.dragging-globally .container {
     opacity: 0.2;
   }
 }
-
 
 .drop-indicator {
   position: absolute;
@@ -423,7 +376,6 @@ body.dragging-globally .container {
   box-shadow: 0 4px 12px var(--box-shadow);
 }
 
-/* Standardized X button style */
 .small-x {
   display: inline-flex;
   justify-content: center;
@@ -435,7 +387,7 @@ body.dragging-globally .container {
   cursor: pointer;
   transition: all 0.3s ease;
   margin-left: 8px;
-  transform: rotate(180deg); /* ✅ Ensure consistent transform baseline */
+  transform: rotate(180deg);
 }
 
 .small-x:hover {
@@ -455,36 +407,53 @@ body.dragging-globally .container {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid var(--glass-border);
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Create a flex container for the main controls (slider + value + dropdown) */
+.slider-main-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 10px;
 }
 
 .slider-container {
+  flex: 1;
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
+  max-width: 65%;
 }
 
-/* Fixed slider styles */
+.value-unit-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
 .size-slider {
-    background: linear-gradient(
-    to right,
-    var(--accent-gradient) 0%,
-    var(--accent-gradient) var(--value-percent),
-    var(--slider-bg) var(--value-percent),
-    var(--slider-bg) 100%
+  width: 100%;
+  height: 8px;
+  border-radius: 8px;
+  background: linear-gradient(
+      to right,
+      var(--accent-color, #FF9F0A) 0%,
+      var(--accent-color, #FF9F0A) var(--value-percent, 0%),
+      var(--slider-track-bg, #4A5055) var(--value-percent, 0%),
+      var(--slider-track-bg, #4A5055) 100%
   );
   -webkit-appearance: none;
   appearance: none;
-  flex: 1;
-  height: 8px;
-  border-radius: 8px;
-  background: var(--slider-bg);
   outline: none;
   transition: all 0.3s ease;
-    padding: 0 0px; /* Add padding to give thumb room */
-  margin: 0 0px;   /* Ensure thumb is not cut off */
+  padding: 0;
+  margin: 0;
   position: relative;
-  box-sizing: border-box; /* Ensure padding doesn't break layout */
-  position: relative;
+  box-sizing: border-box;
 }
 
 .size-slider::-webkit-slider-thumb {
@@ -497,11 +466,10 @@ body.dragging-globally .container {
   cursor: pointer;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   margin-top: 0px;
-  margin-left: 12px; /* Center the thumb */
+  margin-left: 12px;
   position: relative;
   z-index: 2;
 }
-
 
 .size-slider:focus::-webkit-slider-thumb {
   box-shadow: 0 0 0 3px var(--button-hover);
@@ -533,14 +501,15 @@ body.dragging-globally .container {
 }
 
 .size-value {
-  margin-left: 15px;
+  margin: 0;
   padding: 8px 12px;
   background: var(--glass-bg);
   border-radius: 12px;
-  min-width: 70px;
+  min-width: 60px;
   text-align: center;
   cursor: text;
   user-select: text;
+  white-space: nowrap;
 }
 
 .size-value:focus {
@@ -550,25 +519,214 @@ body.dragging-globally .container {
 }
 
 .unit-selector {
-  padding: 12px;
+  margin: 0;
+  padding: 8px 12px 8px 12px;
   border-radius: 12px;
   background: var(--glass-bg);
-  color: black;
+  color: var(--text-color);
   cursor: pointer;
   transition: all 0.3s ease;
-  font-size: 1rem;
+  font-size: 0.9rem;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
   background-image: url("data:image/svg+xml;utf8,<svg fill='currentColor' height='24' width='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
   background-repeat: no-repeat;
-  background-position: right 10px center;
-  padding-right: 30px;
+  background-position: right 6px center;
+  background-size: 16px;
+  border: 1px solid var(--glass-border);
+  width: auto;
+  padding-right: 24px;
 }
 
 .unit-selector:hover {
   border-color: var(--accent-color);
   box-shadow: 0 0 15px var(--button-hover);
+}
+
+.compression-mode-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  justify-content: center;
+}
+
+.toggle-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  width: 100%;
+  margin-top: 5px;
+}
+
+.toggle-label {
+  margin: 0;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+/* Media query for smaller screens to stack elements */
+@media (max-width: 600px) {
+  .slider-main-controls {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .slider-container {
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .value-unit-container {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 56px;
+  height: 30px;
+  perspective: 100px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider.round {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 30px;
+  transition: background-color 0.504s ease, transform 0.504s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+}
+
+.slider.round:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 5px;
+  bottom: 3px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), scale 0.252s ease;
+  transform-origin: center;
+}
+
+input:checked + .slider.round {
+  background-color: var(--accent-color);
+  transform: scale(1.03);
+}
+
+input:checked + .slider.round:before {
+  transform: translateX(24px) scale(1);
+}
+
+input:not(:checked) + .slider.round:before {
+  transform: translateX(0) scale(1);
+}
+
+input:focus + .slider.round {
+  box-shadow: 0 0 8px var(--accent-color);
+}
+
+
+/* Animation for toggle movement */
+@keyframes gooeyToggle {
+  0% { transform: translateX(0) scale(1); } /* Start: 22px × 22px */
+  6.25% { transform: translateX(0.6px) scale(0.95, 0.95); } /* Slight shrink: ~20.9px × 20.9px */
+  12.5% { transform: translateX(1.2px) scale(0.92, 0.92); } /* Liquid shrink: ~20.2px × 20.2px */
+  25% { transform: translateX(3px) scale(0.88, 0.88); } /* Noticeable shrink: ~19.4px × 19.4px */
+  37.5% { transform: translateX(6px) scale(0.9, 0.9); } /* Pulsing: ~19.8px × 19.8px */
+  50% { transform: translateX(12px) scale(0.93, 0.93); } /* Middle, slight pulse: ~20.5px × 20.5px */
+  62.5% { transform: translateX(18px) scale(0.95, 0.95); } /* Pulsing: ~20.9px × 20.9px */
+  75% { transform: translateX(21px) scale(0.92, 0.92); } /* Wobble, slowing: ~20.2px × 20.2px */
+  87.5% { transform: translateX(22.8px) scale(0.95, 0.95); } /* Easing, almost back: ~20.9px × 20.9px */
+  93.75% { transform: translateX(23.4px) scale(0.98, 0.98); } /* Nearly settled: ~21.6px × 21.6px */
+  100% { transform: translateX(24px) scale(1); } /* End: 22px × 22px */
+}
+
+@keyframes gooeyToggleReverse {
+  0% { transform: translateX(24px) scale(1); } /* Start: 22px × 22px */
+  6.25% { transform: translateX(23.4px) scale(0.98, 0.98); } /* Slight shrink: ~21.6px × 21.6px */
+  12.5% { transform: translateX(22.8px) scale(0.95, 0.95); } /* Easing, shrinking: ~20.9px × 20.9px */
+  25% { transform: translateX(21px) scale(0.92, 0.92); } /* Wobble, slowing: ~20.2px × 20.2px */
+  37.5% { transform: translateX(18px) scale(0.95, 0.95); } /* Pulsing: ~20.9px × 20.9px */
+  50% { transform: translateX(12px) scale(0.93, 0.93); } /* Middle, slight pulse: ~20.5px × 20.5px */
+  62.5% { transform: translateX(6px) scale(0.9, 0.9); } /* Pulsing: ~19.8px × 19.8px */
+  75% { transform: translateX(3px) scale(0.88, 0.88); } /* Noticeable shrink: ~19.4px × 19.4px */
+  87.5% { transform: translateX(1.2px) scale(0.92, 0.92); } /* Liquid shrink: ~20.2px × 20.2px */
+  93.75% { transform: translateX(0.6px) scale(0.95, 0.95); } /* Slight shrink: ~20.9px × 20.9px */
+  100% { transform: translateX(0) scale(1); } /* End: 22px × 22px */
+}
+
+input:checked + .slider.round:before {
+  animation: gooeyToggle 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+input:not(:checked) + .slider.round:before {
+  animation: gooeyToggleReverse 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  transition: all 0.4s ease;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background: var(--accent-gradient);
+  transition: all 0.4s ease;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background: var(--glass-bg);
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.size-controls.lossless .slider-container,
+.size-controls.lossless .unit-selector {
+  display: none;
 }
 
 .options {
@@ -671,7 +829,8 @@ body.dragging-globally .container {
   transform: scale(0.98);
   animation: glassFadeIn 0.5s ease forwards;
   border: 1px solid var(--glass-border);
-    border-radius: 20px;
+  border-radius: 20px;
+  overflow: hidden;
 }
 
 .compression-result p {
@@ -681,13 +840,12 @@ body.dragging-globally .container {
   border-radius: 20px;
 }
 
-/* Refined styling for compression result display */
 .result-title {
   font-size: 1.5rem;
   margin-bottom: 16px;
   font-weight: 600;
   letter-spacing: -0.5px;
-    border-radius: 20px;
+  border-radius: 20px;
 }
 
 .result-stats {
@@ -710,20 +868,20 @@ body.dragging-globally .container {
   background: var(--glass-bg);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-    border-radius: 20px;
+  border-radius: 20px;
 }
 
 .stat-value {
   font-size: 1.4rem;
   font-weight: 700;
   margin-bottom: 4px;
-    border-radius: 20px;
+  border-radius: 20px;
 }
 
 .stat-label {
   font-size: 0.9rem;
   opacity: 0.8;
-    border-radius: 20px;
+  border-radius: 20px;
 }
 
 .stat-item.highlight .stat-value {
@@ -737,7 +895,6 @@ body.dragging-globally .container {
   }
 }
 
-/* Improved download button */
 .download-link {
   padding: 12px 24px;
   background: var(--accent-gradient);
@@ -859,36 +1016,38 @@ body.dragging-globally .container {
 .file-results-table {
   width: 100%;
   overflow-x: auto;
-  border-radius: 16px;
+  border-radius: 20px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
 }
 
 .file-results-table table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  border-radius: 16px;
+  border-radius: 20px;
   overflow: hidden;
 }
 
 .file-results-table th:first-child {
-  border-top-left-radius: 16px;
+  border-top-left-radius: 20px;
 }
 
 .file-results-table th:last-child {
-  border-top-right-radius: 16px;
+  border-top-right-radius: 20px;
 }
 
 .file-results-table tr:last-child td:first-child {
-  border-bottom-left-radius: 16px;
+  border-bottom-left-radius: 20px;
 }
 
 .file-results-table tr:last-child td:last-child {
-  border-bottom-right-radius: 16px;
+  border-bottom-right-radius: 20px;
 }
 
 .file-results-table th,
 .file-results-table td {
-  padding: 8px;
+  padding: 14px;
   text-align: left;
   border-bottom: 1px solid var(--glass-border);
 }
@@ -947,17 +1106,17 @@ body.dragging-globally .container {
   }
 
   .drop-area p {
-  margin: 0;
-  transition: all 0.3s ease;
-}
+    margin: 0;
+    transition: all 0.3s ease;
+  }
 
-.drop-area #drop-area-text {
-  transition: opacity 0.3s ease;
-}
+  .drop-area #drop-area-text {
+    transition: opacity 0.3s ease;
+  }
 
-.drop-area.no-files #drop-area-text {
-  display: block;
-}
+  .drop-area.no-files #drop-area-text {
+    display: block;
+  }
 
   .file-name {
     max-width: 100px;
